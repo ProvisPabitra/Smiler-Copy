@@ -137,7 +137,7 @@
 
   @media (max-width: 900px) {
     :root {
-      --smiler-header-height: 64px;
+      --smiler-header-height: 56px;
     }
   }
 
@@ -172,14 +172,14 @@ html {
 
 .smiler-h1 {
   margin: 0;
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
   line-height: 1.2;
   font-weight: 700;
 }
 
 .smiler-h2 {
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 3vw, 2rem);
   line-height: 1.2;
   font-weight: 700;
 }
@@ -195,7 +195,7 @@ html {
   width: 100%;
   max-width: var(--smiler-page-max);
   padding-inline: var(--smiler-pad-x);
-  margin: 3.5rem auto 0;
+  margin: clamp(2.25rem, 4.5vw, 3.5rem) auto 0;
 }
 
 .smiler-home-section > h2 {
@@ -207,7 +207,8 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 600px;
+  min-height: 420px;
+  height: min(70vh, 600px);
   pointer-events: none;
 }
 
@@ -227,7 +228,7 @@ html {
   max-width: var(--smiler-page-max);
   bottom: 3.5rem;
   z-index: 3;
-  padding: 0 24px;
+  padding-inline: var(--smiler-pad-x);
   width: 100%;
   margin: 0 auto;
   right: 0;
@@ -239,7 +240,7 @@ html {
 }
 
 .smiler-hero-title-wrap > h1 {
-  width: 50%;
+  width: min(36rem, 100%);
 }
 
 .smiler-hero-title-wrap > p {
@@ -249,8 +250,7 @@ html {
 
 .smiler-hero-search {
   margin-top: 1rem;
-  width: 50%;
-  min-width: 450px;
+  width: min(36rem, 100%);
   pointer-events: auto;
 }
 
@@ -318,7 +318,7 @@ html {
 
 @media (max-width: 1200px) {
   .smiler-hero-title-wrap > h1 {
-    width: 60%;
+    width: min(33rem, 100%);
   }
 }
 
@@ -336,7 +336,7 @@ html {
   }
 
   .smiler-home-section {
-    margin-top: 2.5rem;
+    margin-top: 2.25rem;
   }
 
   .smiler-home-section > h2 {
@@ -344,11 +344,12 @@ html {
   }
 
   .smiler-hero {
-    height: 400px;
+    min-height: 360px;
+    height: 65vh;
   }
 
   .smiler-hero-body {
-    bottom: 1.5rem;
+    bottom: 1.25rem;
   }
 
   .smiler-hero-title-wrap > h1 {
@@ -357,6 +358,20 @@ html {
 
   .smiler-hero-search {
     width: 100%;
-    min-width: unset;
+  }
+
+  .smiler-search {
+    padding: 12px 16px;
+    gap: 0.75rem;
+  }
+
+  .smiler-search-results {
+    top: 64px;
+  }
+}
+
+@media (max-width: 600px) {
+  .smiler-hero::after {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.08) 55%);
   }
 }

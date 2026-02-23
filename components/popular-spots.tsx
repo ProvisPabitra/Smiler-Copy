@@ -145,11 +145,11 @@ export default function PopularSpots() {
               <button
                 key={city.slug}
                 onClick={() => setActiveCity(city.slug)}
-                className="relative flex w-full shrink-0 items-center pb-0 md:justify-center"
+                className="relative flex w-auto min-w-max shrink-0 items-center pb-0 md:w-full md:min-w-0 md:justify-center"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={cityStickerUrl(city.stickerId)} alt={city.name} className="w-[45%] object-contain" />
-                <span className="w-[55%] min-w-[5rem] text-left text-base font-bold leading-[1.2] text-[#443d4b]">{city.name}</span>
+                <img src={cityStickerUrl(city.stickerId)} alt={city.name} className="w-14 object-contain md:w-[45%]" />
+                <span className="ml-2 text-left text-sm font-bold leading-[1.2] whitespace-nowrap text-[#443d4b] md:ml-0 md:w-[55%] md:min-w-[5rem] md:text-base md:whitespace-normal">{city.name}</span>
                 {activeCity === city.slug && (
                   <span className="absolute bottom-0 left-0 right-0 h-[5px] bg-[#ff4d6b]" />
                 )}

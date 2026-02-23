@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/language-context";
 function HeroLogo() {
   return (
     <a href="/" className="flex items-center gap-1" aria-label="Smiler home">
-      <img src="download.svg" alt="Smiler" className="h-8 w-auto" />
+      <img src="download.svg" alt="Smiler" className="h-11 w-auto sm:h-12" />
     </a>
   );
 }
@@ -81,24 +81,26 @@ export default function HeroSection() {
         <div className="smiler-container pointer-events-auto flex h-[var(--smiler-header-height)] items-center justify-between">
           <HeroLogo />
 
-          <div className="hidden items-center gap-4 md:flex">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <a
               href="#"
-              className="rounded-lg bg-[#ff4d6b] px-7 py-3 text-[15px] font-semibold text-[#FFFFFF]"
+              className="rounded-lg bg-[#ff4d6b] px-2.5 py-1.5 text-[11px] font-semibold text-[#FFFFFF] sm:px-3.5 sm:py-2 sm:text-[13px]"
             >
               {t("nav.photographers")}
             </a>
             <a
               href="#"
-              className="rounded-lg bg-[#FFFFFF] px-7 py-3 text-[15px] font-semibold text-[#ff4d6b]"
+              className="rounded-lg bg-[#FFFFFF] px-2.5 py-1.5 text-[11px] font-semibold text-[#ff4d6b] sm:px-3.5 sm:py-2 sm:text-[13px]"
             >
               {t("nav.partners")}
             </a>
-            <span className="text-[36px] font-bold text-[#FFFFFF]">€</span>
-            <UkRoundFlag />
+            <span className="text-[24px] leading-none font-bold text-[#FFFFFF] sm:text-[30px]">€</span>
+            <span className="scale-75 sm:scale-90">
+              <UkRoundFlag />
+            </span>
             <button
               type="button"
-              className="rounded-full border border-[#FFFFFF]/85 p-1 text-[#FFFFFF]"
+              className="hidden rounded-full border border-[#FFFFFF]/85 p-1 text-[#FFFFFF] lg:block"
               aria-label="Help"
             >
               <HelpCircle className="h-6 w-6" />

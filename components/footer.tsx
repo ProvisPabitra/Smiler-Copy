@@ -15,7 +15,7 @@ function SmilerWordmark() {
 
 function TrustpilotBadge() {
   return (
-    <div className="text-[#FFFFFF] scale-80">
+    <div className="origin-top-left text-[#FFFFFF] scale-100 md:scale-80">
       <p className="text-2xl font-semibold leading-none">
         <span className="mr-1 text-[#00B67A]">★</span>Trustpilot
       </p>
@@ -106,12 +106,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="lg:justify-self-end">
+          <div className="justify-self-start lg:justify-self-end">
             <TrustpilotBadge />
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center gap-6 border-t border-[#FFFFFF]/15 pt-8 md:flex-row md:items-end md:justify-between">
+        <div className="mt-8 flex flex-col items-center gap-5 border-t border-[#FFFFFF]/15 pt-8 text-center md:flex-row md:items-end md:justify-between md:text-left">
           <SmilerWordmark />
 
           <p className="text-[16px] text-[#FFFFFF] md:pb-2">© 2026 Smiler • Capturing moments that matter</p>

@@ -21,7 +21,7 @@ export default function BrowseLandmarks() {
             <a
               key={landmark.name}
               href="#"
-              className="group relative flex h-full min-h-[214px] w-[210px] shrink-0 flex-col items-center justify-center overflow-hidden rounded-[8px] text-[#ffffff] md:w-[230px] lg:w-full"
+              className="group relative flex h-full min-h-[214px] w-[78vw] max-w-[230px] shrink-0 flex-col items-center justify-center overflow-hidden rounded-[8px] text-[#ffffff] sm:w-[220px] lg:w-full lg:max-w-none"
             >
               <Image
                 src={landmark.image}
