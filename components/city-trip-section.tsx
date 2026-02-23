@@ -110,7 +110,12 @@ export default function CityTripSection() {
   return (
     <section className="smiler-home-section">
       <div>
-        <h2 className="smiler-h2 text-[#443d4b]">{t("citytrip.title")}</h2>
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="smiler-h2 text-[#443d4b]">{t("citytrip.title")}</h2>
+          <a href="#" className="hidden items-center gap-2 text-base font-semibold text-[#ff4d6b] md:inline-flex">
+            {t("citytrip.cta")} <span className="text-2xl">→</span>
+          </a>
+        </div>
 
         <div className="mt-7 grid grid-cols-1 gap-5 lg:grid-cols-3">
           {cityTripShoots.map((shoot) => (

@@ -139,13 +139,13 @@ export default function PopularSpots() {
           </a>
         </div>
 
-        <div className="mb-6 border-b border-[#e6e6e6] pb-[5px]">
+        <div className="mt-6 mb-6 border-b border-[#e6e6e6] pb-[5px]">
           <div className="flex gap-6 overflow-x-auto scrollbar-hide md:grid md:grid-cols-5 md:gap-0 md:overflow-visible">
             {orderedCities.map((city) => (
               <button
                 key={city.slug}
                 onClick={() => setActiveCity(city.slug)}
-                className="relative flex w-full shrink-0 items-center border-b-[2px] border-[#e6e6e6] pb-0 md:justify-center"
+                className="relative flex w-full shrink-0 items-center pb-0 md:justify-center"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={cityStickerUrl(city.stickerId)} alt={city.name} className="w-[45%] object-contain" />

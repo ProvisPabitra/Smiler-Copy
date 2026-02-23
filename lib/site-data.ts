@@ -48,10 +48,10 @@ export const photoShootsByCity: Record<CitySlug, PhotoShoot[]> = {
     { id: "p4", city: "Paris", citySlug: "paris", title: "Louvre & Tuileries Garden session", image: "/images/shoots/paris-renato.jpg", imageCount: 6, rating: 4.9, reviewCount: 198, price: 109 },
   ],
   "new-york": [
-    { id: "ny1", city: "New York City", citySlug: "new-york", title: "Central Park professional photoshoot", image: "/images/shoots/nyc-moselle.jpg", imageCount: 6, rating: 4.9, reviewCount: 276, price: 99 },
-    { id: "ny2", city: "New York City", citySlug: "new-york", title: "Brooklyn Bridge & DUMBO shoot", image: "/images/shoots/nyc-anton.jpg", imageCount: 5, rating: 4.8, reviewCount: 203, price: 89 },
-    { id: "ny3", city: "New York City", citySlug: "new-york", title: "Times Square & Rockefeller Center", image: "/images/shoots/nyc-hanna.jpg", imageCount: 6, rating: 5.0, reviewCount: 158, price: 109 },
-    { id: "ny4", city: "New York City", citySlug: "new-york", title: "Top of the Rock sunset session", image: "/images/shoots/nyc-dariia.jpg", imageCount: 6, rating: 4.7, reviewCount: 142, price: 119 },
+    { id: "ny1", city: "New York City", citySlug: "new-york", title: "Times Square photoshoot by top New York photographer", image: "/images/shoots/nyc-hanna.jpg", imageCount: 6, rating: 4.9, reviewCount: 276, price: 330 },
+    { id: "ny2", city: "New York City", citySlug: "new-york", title: "Central Park Family Photoshoot", image: "/images/shoots/nyc-moselle.jpg", imageCount: 5, rating: 4.9, reviewCount: 203, price: 300 },
+    { id: "ny3", city: "New York City", citySlug: "new-york", title: "Dumbo (Manhattan Bridge)", image: "/images/shoots/nyc-anton.jpg", imageCount: 6, rating: 5.0, reviewCount: 158, price: 340 },
+    { id: "ny4", city: "New York City", citySlug: "new-york", title: "Bridges of New York Photo Tour", image: "/images/shoots/nyc-dariia.jpg", imageCount: 6, rating: 4.6, reviewCount: 142, price: 300 },
   ],
   rome: [
     { id: "r1", city: "Rome", citySlug: "rome", title: "Colosseum & Roman Forum photoshoot", image: "/images/shoots/rome-camtu.jpg", imageCount: 6, rating: 4.9, reviewCount: 289, price: 79 },
@@ -82,15 +82,12 @@ export const browseLandmarks: { name: string; image: string; stickerId: string }
 ];
 
 export const cityTripShoots: PhotoShoot[] = [
-  { id: "ct1", city: "Santorini", citySlug: "paris", title: "Oia Village shoot by Santorini photographer", image: "/images/shoots/london-mehr.jpg", imageCount: 6, rating: 4.9, reviewCount: 198, price: 89 },
-  { id: "ct2", city: "Rome", citySlug: "rome", title: "Trevi Fountain shoot by top Rome photographer", image: "/images/shoots/rome-mohamed.jpg", imageCount: 6, rating: 5.0, reviewCount: 312, price: 99 },
-  { id: "ct3", city: "Barcelona", citySlug: "barcelona", title: "Sagrada Familia shoot by top Barcelona photographer", image: "/images/shoots/barcelona-sagrada.jpg", imageCount: 6, rating: 4.8, reviewCount: 156, price: 109 },
-  { id: "ct4", city: "Paris", citySlug: "paris", title: "Eiffel Tower and Trocadero sunrise photoshoot", image: "/images/shoots/paris-pablo.jpg", imageCount: 6, rating: 4.9, reviewCount: 267, price: 79 },
-  { id: "ct5", city: "New York City", citySlug: "new-york", title: "Brooklyn Bridge and DUMBO portrait shoot", image: "/images/shoots/nyc-anton.jpg", imageCount: 6, rating: 4.7, reviewCount: 89, price: 79 },
-  { id: "ct6", city: "Sydney", citySlug: "sydney", title: "Opera House harbour photoshoot experience", image: "/images/shoots/sydney-floriane.jpg", imageCount: 6, rating: 5.0, reviewCount: 178, price: 99 },
-  { id: "ct7", city: "Paris", citySlug: "paris", title: "Montmartre shoot by local Paris photographer", image: "/images/shoots/paris-renato.jpg", imageCount: 6, rating: 4.9, reviewCount: 234, price: 89 },
-  { id: "ct8", city: "Rome", citySlug: "rome", title: "Colosseum golden hour photoshoot", image: "/images/shoots/rome-aras.jpg", imageCount: 6, rating: 4.8, reviewCount: 201, price: 89 },
-  { id: "ct9", city: "Porto", citySlug: "paris", title: "Ribeira District photoshoot with local expert", image: "/images/shoots/porto-lina.jpg", imageCount: 6, rating: 5.0, reviewCount: 145, price: 79 },
+  { id: "ct1", city: "Santorini", citySlug: "paris", title: "Oia Village shoot by Santorini photographer", image: "/images/shoots/london-mehr.jpg", imageCount: 6, rating: 4.9, reviewCount: 198, price: 129 },
+  { id: "ct2", city: "Miami", citySlug: "new-york", title: "Miami Beach", image: "/images/shoots/dubai-recep.jpg", imageCount: 6, rating: 5.0, reviewCount: 312, price: 300 },
+  { id: "ct3", city: "Venice", citySlug: "rome", title: "Piazza San Marco shoot by Venice photographer", image: "/images/shoots/rome-valentina.jpg", imageCount: 6, rating: 4.9, reviewCount: 156, price: 89 },
+  { id: "ct4", city: "Washington, DC", citySlug: "new-york", title: "Romantic photoshoot for couples", image: "/images/shoots/nyc-dariia.jpg", imageCount: 6, rating: 4.9, reviewCount: 267, price: 330 },
+  { id: "ct5", city: "Rome", citySlug: "rome", title: "Flying dress photoshoot at Colosseum in Rome", image: "/images/shoots/rome-aras.jpg", imageCount: 6, rating: 4.9, reviewCount: 89, price: 310 },
+  { id: "ct6", city: "Como", citySlug: "rome", title: "Private photo tour around Como", image: "/images/shoots/lanzarote-laura.jpg", imageCount: 6, rating: 5.0, reviewCount: 178, price: 210 },
 ];
 
 // Translations

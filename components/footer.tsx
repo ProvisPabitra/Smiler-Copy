@@ -15,7 +15,7 @@ function SmilerWordmark() {
 
 function TrustpilotBadge() {
   return (
-    <div className="text-[#FFFFFF]">
+    <div className="text-[#FFFFFF] scale-80">
       <p className="text-2xl font-semibold leading-none">
         <span className="mr-1 text-[#00B67A]">★</span>Trustpilot
       </p>

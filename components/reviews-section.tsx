@@ -110,7 +110,7 @@ export default function ReviewsSection() {
           </div>
         </div>
 
-        <div className="mt-5 text-center">
+        <div className="text-center scale-80 mb-15">
           <p className="text-[17px] text-[#443d4b]">
             A score of <span className="font-semibold">4.9</span> out of 5 based on <span className="font-semibold underline">6,870 reviews</span>.
           </p>

@@ -110,7 +110,9 @@ export default function HeroSection() {
       <div className="smiler-hero-body pointer-events-auto">
         <div className="smiler-hero-title-wrap">
           <h1 className="smiler-h1">Capturing moments you'll never forget</h1>
-          <p className="smiler-p">Book your next photoshoot. Available in 150+ locations</p>
+          <p className="mt-3 text-[1rem] leading-[1.4] font-bold text-[#ffffff]">
+            Book your next photoshoot experience. Available in 150+ locations
+          </p>
           <form className="smiler-hero-search">
             <label className="sr-only" htmlFor="hero-search">
               Search city or landmark
