@@ -1,50 +1,104 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 import { popularCities, photoShootsByCity, type CitySlug } from "@/lib/site-data";
 
-function PhotoShootCard({
-  image,
-  title,
+function cityStickerUrl(stickerId: string) {
+  return `/images/stickers/cities/${stickerId}.svg`;
+}
+
+function ShootCard({
   city,
-  imageCount,
+  title,
+  rating,
+  price,
+  images,
 }: {
-  image: string;
-  title: string;
   city: string;
-  imageCount: number;
+  title: string;
+  rating: number;
+  price: number;
+  images: string[];
 }) {
+  const [activeImage, setActiveImage] = useState(0);
+
+  const prevImage = () => {
+    setActiveImage((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const nextImage = () => {
+    setActiveImage((prev) => (prev + 1) % images.length);
+  };
+
   return (
     <a
       href="#"
-      className="group flex w-[280px] shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:shadow-md md:w-[300px]"
+      className="smiler-product-card group bg-[#FFFFFF]"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
+      <div className="relative h-[250px] w-full overflow-hidden">
         <Image
-          src={image}
+          src={images[activeImage]}
           alt={title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="300px"
+          className="object-cover"
+          sizes="(max-width: 1024px) 90vw, 25vw"
         />
-        {/* Image dots indicator */}
+
+        {images.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                prevImage();
+              }}
+              className="absolute left-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#000000]/35 text-[#FFFFFF] opacity-0 transition-opacity group-hover:opacity-100"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                nextImage();
+              }}
+              className="absolute right-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#000000]/35 text-[#FFFFFF] opacity-0 transition-opacity group-hover:opacity-100"
+              aria-label="Next image"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </>
+        )}
+
         <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5">
-          {Array.from({ length: Math.min(imageCount, 6) }).map((_, i) => (
+          {images.map((_, index) => (
             <span
-              key={i}
-              className={`block h-1.5 w-1.5 rounded-full ${
-                i === 0 ? "bg-[#ffffff]" : "bg-[#ffffff]/50"
+              key={index}
+              className={`h-2 w-2 rounded-full ${
+                index === activeImage ? "bg-[#FFFFFF]" : "bg-[#FFFFFF]/60"
               }`}
             />
           ))}
         </div>
       </div>
-      <div className="flex flex-col gap-1 p-4">
-        <span className="text-xs font-medium text-muted-foreground">{city}</span>
-        <h3 className="text-sm font-semibold text-card-foreground">{title}</h3>
+
+      <div className="p-4">
+        <p className="text-xs font-medium uppercase leading-[1.5] text-[#b3b3b3]">{city}</p>
+        <h3 className="line-clamp-1 pt-[2px] text-[1.125rem] font-bold leading-[1.5] text-[#443d4b]">{title}</h3>
+
+        <div className="mt-2 flex items-center justify-between">
+          <p className="flex items-center gap-[0.4rem] text-base font-bold leading-normal text-[#443d4b]">
+            <span className="text-[#ffd261]">★★★★★</span>
+            {rating.toFixed(1)}
+          </p>
+          <p className="flex items-center whitespace-pre-wrap text-base font-normal leading-[1.5] text-[#443d4b]">
+            <span className="pr-1">From</span> <span className="font-bold">€{price}</span>
+          </p>
+        </div>
       </div>
     </a>
   );
@@ -52,97 +106,69 @@ function PhotoShootCard({
 
 export default function PopularSpots() {
   const { t } = useLanguage();
-  const [activeCity, setActiveCity] = useState<CitySlug>("paris");
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeCity, setActiveCity] = useState<CitySlug>("new-york");
+  const cityOrder: CitySlug[] = ["new-york", "paris", "rome", "barcelona", "sydney"];
 
-  const shoots = photoShootsByCity[activeCity] ?? [];
+  const shoots = useMemo(() => {
+    const list = photoShootsByCity[activeCity] ?? [];
+    return list.slice(0, 4);
+  }, [activeCity]);
 
-  const scroll = (direction: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const amount = 320;
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -amount : amount,
-      behavior: "smooth",
-    });
+  const cityImages = useMemo(() => shoots.map((shoot) => shoot.image), [shoots]);
+
+  const getGallery = (currentImage: string) => {
+    const unique = [currentImage, ...cityImages.filter((img) => img !== currentImage)];
+    return unique.slice(0, 4);
   };
 
-  return (
-    <section id="popular" className="py-12 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        {/* Section Title */}
-        <h2 className="text-2xl font-bold text-foreground md:text-3xl">
-          {t("popular.title")}
-        </h2>
+  const orderedCities = useMemo(
+    () =>
+      cityOrder
+        .map((slug) => popularCities.find((city) => city.slug === slug))
+        .filter((city): city is (typeof popularCities)[number] => Boolean(city)),
+    []
+  );
 
-        {/* City Tabs */}
-        <div className="mt-6 flex gap-3 overflow-x-auto pb-2 scrollbar-hide md:mt-8">
-          {popularCities.map((city) => (
-            <button
-              key={city.slug}
-              onClick={() => setActiveCity(city.slug)}
-              className={`flex shrink-0 items-center gap-2.5 rounded-full border px-4 py-2 text-sm font-medium transition-all ${
-                activeCity === city.slug
-                  ? "border-smiler-pink bg-smiler-pink/5 text-smiler-pink"
-                  : "border-border bg-background text-foreground hover:border-smiler-pink/40 hover:text-smiler-pink"
-              }`}
-            >
-              <div className="relative h-7 w-7 overflow-hidden rounded-full">
-                <Image
-                  src={city.image}
-                  alt={city.name}
-                  fill
-                  className="object-cover"
-                  sizes="28px"
-                />
-              </div>
-              <span>{city.name}</span>
-            </button>
-          ))}
+  return (
+    <section id="popular" className="smiler-home-section">
+      <div>
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="smiler-h2 text-[#443d4b]">{t("popular.title")}</h2>
+          <a href="#" className="hidden items-center gap-2 text-base font-semibold text-[#ff4d6b] md:inline-flex">
+            See all cities <span className="text-2xl">→</span>
+          </a>
         </div>
 
-        {/* Carousel */}
-        <div className="relative mt-6 md:mt-8">
-          {/* Navigation Arrows */}
-          <button
-            onClick={() => scroll("left")}
-            className="absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background shadow-md transition-all hover:shadow-lg focus:outline-none md:-left-5"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft className="h-5 w-5 text-foreground" />
-          </button>
-          <button
-            onClick={() => scroll("right")}
-            className="absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background shadow-md transition-all hover:shadow-lg focus:outline-none md:-right-5"
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="h-5 w-5 text-foreground" />
-          </button>
-
-          {/* Cards */}
-          <div
-            ref={scrollRef}
-            className="flex gap-4 overflow-x-auto scroll-smooth pb-4 scrollbar-hide md:gap-5"
-          >
-            {shoots.map((shoot) => (
-              <PhotoShootCard
-                key={shoot.id}
-                image={shoot.image}
-                title={shoot.title}
-                city={shoot.city}
-                imageCount={shoot.imageCount}
-              />
+        <div className="mb-6 border-b border-[#e6e6e6] pb-[5px]">
+          <div className="flex gap-6 overflow-x-auto scrollbar-hide md:grid md:grid-cols-5 md:gap-0 md:overflow-visible">
+            {orderedCities.map((city) => (
+              <button
+                key={city.slug}
+                onClick={() => setActiveCity(city.slug)}
+                className="relative flex w-full shrink-0 items-center border-b-[2px] border-[#e6e6e6] pb-0 md:justify-center"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={cityStickerUrl(city.stickerId)} alt={city.name} className="w-[45%] object-contain" />
+                <span className="w-[55%] min-w-[5rem] text-left text-base font-bold leading-[1.2] text-[#443d4b]">{city.name}</span>
+                {activeCity === city.slug && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[5px] bg-[#ff4d6b]" />
+                )}
+              </button>
             ))}
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="mt-8 flex justify-center">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 rounded-full border border-smiler-pink px-8 py-3 text-sm font-semibold text-smiler-pink transition-all hover:bg-smiler-pink hover:text-[#ffffff]"
-          >
-            {t("hero.cta")}
-          </a>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {shoots.map((shoot) => (
+            <ShootCard
+              key={shoot.id}
+              city={shoot.city}
+              title={shoot.title}
+              rating={shoot.rating}
+              price={shoot.price}
+              images={getGallery(shoot.image)}
+            />
+          ))}
         </div>
       </div>
     </section>
